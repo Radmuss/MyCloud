@@ -31,7 +31,7 @@
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $user; //zapamiętanie nazwy użytkownika celem przedstawienia jej w następnym oknie
             $_SESSION['user_id'] = $rekord['id'];
-            header("Location: /z5/index.php");
+            header("Location: /z5/sesja/readcookies.php");
             exit();
         } else {
             mysqli_close($link);

@@ -32,15 +32,15 @@
     setcookie("browser", Get_browser_name($_SERVER['HTTP_USER_AGENT']), time() + 10);
     ?>
     <script>
-        document.cookie = "width=" + screen.width + "; max-age=10";
-        document.cookie = "height=" + screen.height + "; max-age=10";
-        document.cookie = "screenwidth=" + screen.availWidth + "; max-age=10";
-        document.cookie = "screenheight=" + screen.availHeight + "; max-age=10";
-        document.cookie = "colors=" + screen.colorDepth + "; max-age=10";
-        document.cookie = "lang=" + navigator.language + "; max-age=10";
-        document.cookie = "java=" + navigator.javaEnabled() + "; max-age=10";
-        document.cookie = "cookies=" + navigator.cookieEnabled + "; max-age=10";
-        window.location.assign('savetoBD.php');
+    document.cookie = "width=" + screen.width + "; max-age=10";
+    document.cookie = "height=" + screen.height + "; max-age=10";
+    document.cookie = "screenwidth=" + screen.availWidth + "; max-age=10";
+    document.cookie = "screenheight=" + screen.availHeight + "; max-age=10";
+    document.cookie = "colors=" + screen.colorDepth + "; max-age=10";
+    document.cookie = "lang=" + navigator.language + "; max-age=10";
+    document.cookie = "java=" + navigator.javaEnabled() + "; max-age=10";
+    document.cookie = "cookies=" + navigator.cookieEnabled + "; max-age=10";
+    window.location.assign('savetoBD.php');
     </script>
 
 </BODY>
