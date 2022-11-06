@@ -40,6 +40,8 @@
     document.cookie = "lang=" + navigator.language + "; max-age=10";
     document.cookie = "java=" + navigator.javaEnabled() + "; max-age=10";
     document.cookie = "cookies=" + navigator.cookieEnabled + "; max-age=10";
+
+    localStorage.setItem("attempts", 0);
     window.location.assign('savetoBD.php');
     </script>
 
