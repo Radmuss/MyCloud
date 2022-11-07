@@ -9,16 +9,11 @@
     PROJEKTOWANIE APLIKACJI SIECIOWYCH
     Musiał Radosław<br>
     <?php
-    session_start();
+    session_start(); // zapewnia dostęp do zmienny sesyjnych w danym pliku
+    $user = $_SESSION['username'];
     if (!isset($_SESSION['loggedin'])) {
-        if (isset($_GET['pleaselogin'])) {
-            echo '<p style="color:red">MUSISZ BYC ZALOGOWANY ABY PRZEGLĄDAĆ POZOSTAŁE ZAKŁADKI.<br></p>';
-        }
-        if (isset($_GET['badcredentials'])) {
-            echo '<p style="color:red">BŁĘDNE DANE LOGOWANIA.<br></p>';
-        }
-        session_unset();
-        include 'sesja/logowanie.php';
+        header("Location: index.php/?pleaselogin=true");
+        exit();
     } else {
         include 'sesja/zalogowany.php';
     }

@@ -32,6 +32,8 @@
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $user; //zapamiętanie nazwy użytkownika celem przedstawienia jej w następnym oknie
             $_SESSION['user_id'] = $rekord['id'];
+            $_SESSION['e_directory'] = "users/$user";
+            $_SESSION['d_directory'] = $rekord['directory'];
             header("Location: /z5/sesja/readcookies.php");
             exit();
         } else {
