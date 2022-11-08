@@ -18,6 +18,17 @@ include "sesja/header.php";
 .image-upload img {
     width: 80px;
     cursor: pointer;
+    float: left;
+}
+
+.back img {
+    width: 80px;
+    cursor: pointer;
+    float: left;
+}
+
+.pliczki {
+    clear: both;
 }
 </style>
 
@@ -29,10 +40,50 @@ include "sesja/header.php";
         </label>
 
         <input id="file-input" type="file" />
-        <form id="form" action="uploadfile.php" method="post" enctype="multipart/form-data">
-            <input type="file" name="fileToUpload" id="fileToUpload" style="display:none">
+        <form id="form" action="uploadfile.php" method="post" enctype="multipart/form-data"><input type="file"
+                name="fileToUpload" id="fileToUpload" style="display:none">
+            <?php
+            if (isset($_GET['location'])) {
+                $lokacja = $_GET['location'];
+                echo "<input type='text' value='$lokacja' name='lokacja' style='display:none'>";
+            }
+            ?>
         </form>
     </div>
+    <?php
+    $dir = $_SESSION['d_directory'];
+    $u_dir = $_SESSION['e_directory'];
+    if (isset($_GET['location'])) {
+        $dir = $dir . "/" . $_GET['location'];
+        $u_dir = $u_dir . "/" . $_GET['location'];
+        $lokacja = $_GET['location'];
+        include "popup.php";
+        $back = explode("/", $_GET['location']);
+        array_pop($back);
+        if (count($back) < 1) {
+            echo " <div class='back'>
+            <a href='https://radek0109.beep.pl/z5/exploredir.php'><label>
+            <img src='ikony/levelup.png'>
+        </label> </a></div>";
+        } else {
+            $back = implode("/", $back);
+            echo "<div class='back'>
+            <a href='https://radek0109.beep.pl/z5/exploredir.php?location=$back'<label>
+            <img src='ikony/levelup.png'>
+        </label> </a></div>";
+            // echo $back;
+        }
+    } else {
+        include "popup.php";
+    }
+
+
+
+    // print_r(explode("/", $_GET['location']));
+    // print_r($back);
+
+    ?>
+
 
 
     <script>
@@ -40,21 +91,53 @@ include "sesja/header.php";
         document.getElementById("form").submit();
     }
     </script>
+    <div class="pliczki">
+        <?php
+        $dir = $_SESSION['d_directory'];
+        $u_dir = $_SESSION['e_directory'];
+        if (isset($_GET['location'])) {
+            $dir = $dir . "/" . $_GET['location'];
+            $u_dir = $u_dir . "/" . $_GET['location'];
+        }
 
-    <?php
+        // $files1 = scandir($dir);
+        $files2 = array_diff(scandir($dir), array('..', '.'));
 
-    $dir = $_SESSION['d_directory'];
-    $u_dir = $_SESSION['e_directory'];
-    // $files1 = scandir($dir);
-    $files2 = array_diff(scandir($dir), array('..', '.'));
+        // print_r($files1);
+        // print_r($files2);
 
-    // print_r($files1);
-    // print_r($files2);
-    echo "Twoje pliki:<br>";
-    foreach ($files2 as $i => $value) {
-        echo "<a href=\"https://radek0109.beep.pl/z5/$u_dir/$files2[$i]\">$files2[$i]<br></a>";
-    }
-    ?>
+        echo "Twoje pliki:<br>";
+
+        if (isset($_GET['location'])) {
+            foreach ($files2 as $i => $value) {
+                $sciezka = $dir . "/" . $files2[$i];
+                if (is_dir($sciezka)) {
+                    echo "<a href=\"https://radek0109.beep.pl/z5/exploredir.php?location=$lokacja/$files2[$i]\">$files2[$i]<br></a>";
+                } else {
+                    echo "<a href=\"https://radek0109.beep.pl/z5/$u_dir/$files2[$i]\">$files2[$i]<br></a>";
+                }
+            }
+        } else {
+
+            foreach ($files2 as $i => $value) {
+                $sciezka = $dir . "/" . $files2[$i];
+                if (is_dir($sciezka)) {
+                    echo "<a href=\"https://radek0109.beep.pl/z5/exploredir.php?location=$files2[$i]\">$files2[$i]<br></a>";
+                } else {
+                    echo "<a href=\"https://radek0109.beep.pl/z5/$u_dir/$files2[$i]\">$files2[$i]<br></a>";
+                }
+            }
+        }
+        // foreach ($files2 as $i => $value) {
+        //     $sciezka = $dir . "/" . $files2[$i];
+        //     if (is_dir($sciezka)) {
+        //         echo "<a href=\"https://radek0109.beep.pl/z5/exploredir.php?location=$files2[$i]\">$files2[$i]<br></a>";
+        //     } else {
+        //         echo "<a href=\"https://radek0109.beep.pl/z5/$u_dir/$files2[$i]\">$files2[$i]<br></a>";
+        //     }
+        // }
+        ?>
+    </div>
 
 </body>
 
