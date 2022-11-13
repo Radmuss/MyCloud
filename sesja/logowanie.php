@@ -5,11 +5,13 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title> Musiał Radosław </title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 </head>
 
 <BODY>
     Formularz logowania
-    <form method="post" action="/z5/sesja/weryfikuj3.php">
+    <form method="post" action="/z5/sesja/weryfikuj3.php" id="form-id">
         Login:<input type="text" name="user" maxlength="20" size="20"><br>
         Hasło:<input type="password" name="pass" maxlength="20" size="20"><br>
         <input type="submit" name="Loguj" value="Loguj" id="Button" style="display:none">
@@ -24,13 +26,26 @@
         echo "<script>document.getElementById('Button').style.display = 'inline'</script>";
         mysqli_close($link); // zamknięcie połączenia z BD
     } else {
-        echo '<p style="color:red">PRZEKROCZONO LIMIT PRÓB LOGOWANIA, ODCZEKAJ 5 SEKUND.<br></p>';
-        echo     "<script>
-        setTimeout(showStuff, 5000);
-        function showStuff(Button){
-            document.getElementById('Button').style.display = 'inline';
-        }
-        </script>";
+        echo '<p style="color:red">PRZEKROCZONO LIMIT PRÓB LOGOWANIA, ODCZEKAJ 5 SEKUND.<br></p>
+    <script>
+    $(window).ready(function() {
+        $("#form-id").on("keypress", function(event) {
+            console.log("aaya");
+            var keyPressed = event.keyCode || event.which;
+            if (keyPressed === 13) {
+                alert("Po trzech nieudanych próbach musisz się zalogować za pomocą przycisku LOGUJ!");
+                event.preventDefault();
+            }
+        });
+    });
+    </script>
+    <script>
+    setTimeout(showStuff, 5000);
+
+    function showStuff(Button) {
+        document.getElementById("Button").style.display = "inline";
+    }
+    </script>';
         mysqli_close($link);
     }
     // $now = new DateTime();
