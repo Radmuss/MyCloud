@@ -2,6 +2,15 @@
 include "../header.php";
 include "../BD.php";
 echo "<a href=\"https://radek0109.beep.pl/z5/exploredir.php\">moje pliki<br></a>";
+$result = mysqli_query($link, "SELECT * FROM break_ins AS difference WHERE `wyswietlono`=0"); // wiersza, w którym login=login z formularza
+$rekord = mysqli_fetch_array($result); // wiersza z BD, struktura zmiennej jak w BD 
+if (isset($rekord['datetime'])) {
+    $ip = $rekord['ip'];
+    $date = $rekord['datetime'];
+    echo "<p style=\"color:red\">$date: 3 NIEUDANE PRÓBY LOGOWANIA Z ADRESU IP: $ip.<br></p>";
+
+    mysqli_query($link, "UPDATE `break_ins` SET `wyswietlono` = '1' WHERE `ip` = '$ip';"); // wiersza, w którym login=login z formularza
+}
 echo "<br><br>Historia logowania do portalu: <br>";
 $rezultat = mysqli_query($link, "SELECT * FROM goscieportalu ORDER BY id DESC") or die("Błąd zapytania do bazy: $dbname");
 print "<TABLE CELLPADDING=5 BORDER=1>";

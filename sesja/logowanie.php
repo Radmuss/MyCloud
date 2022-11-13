@@ -33,18 +33,28 @@
             console.log("aaya");
             var keyPressed = event.keyCode || event.which;
             if (keyPressed === 13) {
-                alert("Po trzech nieudanych próbach musisz się zalogować za pomocą przycisku LOGUJ!");
-                event.preventDefault();
+                alert("Musisz odczekać 5 sekund!\n Jeśli 5 sekund minęło kliknij OK, a nastąpi logowanie.");
+                return false;
             }
         });
     });
     </script>
     <script>
     setTimeout(showStuff, 5000);
+    setTimeout(showStuff, 5000);
 
     function showStuff(Button) {
         document.getElementById("Button").style.display = "inline";
-    }
+    $(window).ready(function() {
+        $("#form-id").on("keypress", function(event) {
+            var keyPressed = event.keyCode || event.which;
+            if (keyPressed === 13) {
+                $("#form-id").submit();
+                event.preventDefault();
+            }
+        });
+    });
+}
     </script>';
         mysqli_close($link);
     }
