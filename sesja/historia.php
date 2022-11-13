@@ -1,7 +1,7 @@
 <?php
 include "../header.php";
 include "../BD.php";
-
+echo "<a href=\"https://radek0109.beep.pl/z5/exploredir.php\">moje pliki<br></a>";
 echo "<br><br>Historia logowania do portalu: <br>";
 $rezultat = mysqli_query($link, "SELECT * FROM goscieportalu ORDER BY id DESC") or die("Błąd zapytania do bazy: $dbname");
 print "<TABLE CELLPADDING=5 BORDER=1>";
@@ -24,4 +24,3 @@ while ($wiersz = mysqli_fetch_array($rezultat)) {
 }
 print "</TABLE>";
 mysqli_close($link);
-?>
