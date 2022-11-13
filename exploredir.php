@@ -30,6 +30,14 @@ include "sesja/header.php";
 .pliczki {
     clear: both;
 }
+
+
+.pliczki img {
+
+    cursor: pointer;
+    /* float: left; */
+    width: 20px;
+}
 </style>
 
 <body>
@@ -107,14 +115,20 @@ include "sesja/header.php";
         // print_r($files2);
 
         echo "Twoje pliki:<br>";
-
+        // echo "<div class=\"delete\">"
         if (isset($_GET['location'])) {
             foreach ($files2 as $i => $value) {
                 $sciezka = $dir . "/" . $files2[$i];
                 if (is_dir($sciezka)) {
-                    echo "<a href=\"https://radek0109.beep.pl/z5/exploredir.php?location=$lokacja/$files2[$i]\">$files2[$i]<br></a>";
+                    echo "<a href=\"https://radek0109.beep.pl/z5/exploredir.php?location=$lokacja/$files2[$i]\">$files2[$i] </a>    <a href=\"https://radek0109.beep.pl/z5/delete_this.php?location=$lokacja&thing_to_delete=$lokacja/$files2[$i]\">
+                    <label>
+                    <img src='ikony/delete.png'>
+                    </label></a><br>";
                 } else {
-                    echo "<a href=\"https://radek0109.beep.pl/z5/$u_dir/$files2[$i]\">$files2[$i]<br></a>";
+                    echo "<a href=\"https://radek0109.beep.pl/z5/$u_dir/$files2[$i]\">$files2[$i]</a>   <a href=\"https://radek0109.beep.pl/z5/delete_this.php?location=$lokacja&thing_to_delete=$lokacja/$files2[$i]\">
+                    <label>
+                    <img src='ikony/delete.png'>
+                    </label></a><br>";
                 }
             }
         } else {
@@ -122,9 +136,15 @@ include "sesja/header.php";
             foreach ($files2 as $i => $value) {
                 $sciezka = $dir . "/" . $files2[$i];
                 if (is_dir($sciezka)) {
-                    echo "<a href=\"https://radek0109.beep.pl/z5/exploredir.php?location=$files2[$i]\">$files2[$i]<br></a>";
+                    echo "<a href=\"https://radek0109.beep.pl/z5/exploredir.php?location=$files2[$i]\">$files2[$i]</a>  <a href=\"https://radek0109.beep.pl/z5/delete_this.php?thing_to_delete=$files2[$i]\">
+                    <label>
+                    <img src='ikony/delete.png'>
+                    </label></a><br>";
                 } else {
-                    echo "<a href=\"https://radek0109.beep.pl/z5/$u_dir/$files2[$i]\">$files2[$i]<br></a>";
+                    echo "<a href=\"https://radek0109.beep.pl/z5/$u_dir/$files2[$i]\">$files2[$i]</a>   <a href=\"https://radek0109.beep.pl/z5/delete_this.php?thing_to_delete=$files2[$i]\">
+                    <label>
+                    <img src='ikony/delete.png'>
+                    </label></a><br>";
                 }
             }
         }
@@ -136,6 +156,7 @@ include "sesja/header.php";
         //         echo "<a href=\"https://radek0109.beep.pl/z5/$u_dir/$files2[$i]\">$files2[$i]<br></a>";
         //     }
         // }
+
         ?>
     </div>
 

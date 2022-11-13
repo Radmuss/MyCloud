@@ -99,7 +99,7 @@
 
 <body>
     <div class="image-upload">
-        <label for="buttonn">
+        <label for="buttonn" title="Stwórz folder">
             <img src="ikony/mkdir.png" />
         </label>
         <button onclick="openForm()" id="buttonn" style="display: none;"></button>
