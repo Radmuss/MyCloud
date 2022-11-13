@@ -6,9 +6,9 @@ $target_dir = $_SESSION['e_directory'];
 //     $location = $_GET['location'];
 //     $target_dir = $target_dir . "/" . $location;
 // }
-echo $target_dir;
+// echo $target_dir;
 $todelete = $_GET['thing_to_delete'];
-echo $todelete;
+// echo $todelete;
 $plik = $target_dir . "/" . $todelete;
 
 if (is_dir($plik) && is_dir_empty($plik)) {
@@ -23,6 +23,7 @@ if (is_dir($plik) && is_dir_empty($plik)) {
         echo "Katalog nie jest pusty, czy chcesz usunąć go razem z zawartością?<br>";
         echo "<a href='$uri&sure=true'>TAK    </a>";
         if (isset($_GET['location'])) {
+            $location = $_GET['location'];
             echo "<a href='https://radek0109.beep.pl/z5/exploredir.php?location=$location'>NIE<br></a>";
         } else echo "<a href='https://radek0109.beep.pl/z5/exploredir.php'>NIE<br></a>";
     }
